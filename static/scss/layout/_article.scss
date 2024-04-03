@@ -1,12 +1,15 @@
 .l-article {
 	flex: 1;
-	background: #d1d1d17d;
-	margin-bottom: 60px;
+    background: rgb(202 202 203);
+    margin-bottom: 60px;
 	@media screen and (max-width: 950px) {
 		width: 100%;
 	}
 	&__contact {
 		background: transparent;
 		flex: 1;
+	}
+	&.blog-page {
+		box-shadow: rgba(50,50,93,.1) 0px 13px 27px -5px, rgba(0,0,0,.1) 0px 8px 16px -8px;
 	}
 }
