@@ -1,0 +1,12 @@
+.l-article {
+	flex: 1;
+	background: #d1d1d17d;
+	margin-bottom: 60px;
+	@media screen and (max-width: 950px) {
+		width: 100%;
+	}
+	&__contact {
+		background: transparent;
+		flex: 1;
+	}
+}

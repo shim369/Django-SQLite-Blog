@@ -1,0 +1,37 @@
+{
+  "name": "TECH BLOG",
+  "short_name": "TECH BLOG",
+  "id": "/",
+  "start_url": "/",
+  "categories": ["developer","development","developer tools","design","lifestyle"],
+  "description": "TECH BLOG is a blog that publishes web development and a part of life.In web development, Python, Django, Figma, SEO are the main categories.",
+  "display": "standalone",
+  "background_color": "#161719",
+  "theme_color": "#161719",
+  "icons": [
+      {
+          "src": "/media/icon-s.png",
+          "sizes": "192x192",
+          "type": "image/png",
+		  "purpose": "any"
+      },
+      {
+          "src": "/media/icon-s.png",
+          "sizes": "192x192",
+          "type": "image/png",
+		  "purpose": "maskable"
+      },
+      {
+          "src": "/media/icon-b.png",
+          "sizes": "512x512",
+          "type": "image/png",
+		  "purpose": "any"
+      },
+      {
+          "src": "/media/icon-b.png",
+          "sizes": "512x512",
+          "type": "image/png",
+		  "purpose": "maskable"
+      }
+  ]
+}

@@ -1,0 +1,124 @@
+.l-aside {
+	width: 320px;
+	margin-left: 4%;
+	word-break: break-all;
+	@media screen and (max-width: 950px) {
+		width: 100%;
+		margin-bottom: 0;
+		margin-left: 0;
+	}
+	&__title {
+		color: $base_color;
+		text-align: center;
+		margin-bottom: 25px;
+		font-family: $font_en;
+		text-transform: uppercase;
+		font-size: 1.8rem;
+	}
+	&__wn-list {
+		margin-bottom: 80px;
+		&__item {
+			margin: 20px 0;
+			background: #d1d1d17d;
+			box-shadow: rgb(50 50 93 / 10%) 0px 13px 27px -5px, rgb(0 0 0 / 10%) 0px 8px 16px -8px;
+			transition: .2s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+			&:first-child {
+				margin-top: 0;
+			}
+			&:hover {
+				box-shadow: none;
+			}
+		}
+		&__link {
+			padding: 10px;
+			display: flex;
+			align-items: center;
+			&:hover {
+				img {
+					transform:scale(1.1,1.1);
+				}
+			}
+		}
+		&__thumbnail {
+			width: 123px;
+			height: 82px;
+			display: inherit;
+			overflow:hidden;
+			img {
+				height: 100%;
+				object-fit: cover;
+				transition: all .8s ease;
+			}
+		}
+		&__text {
+			padding: 0 0 0 10px;
+			flex: 1;
+		}
+		&__h4 {
+			color: #26272b;
+			word-break: break-all;
+			line-height: 1.2;
+			font-family: $font_normal;
+			font-weight: normal;
+			font-size: .9rem;
+		}
+		&__time {
+			margin-top: 6px;
+			display: block;
+			color: #26272b;
+			font-size: .9rem;
+			i {
+				margin-right: 3px;
+				font-size: .9rem;
+			}
+		}
+	}
+	&__category-list {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		margin-bottom: 60px;
+		&__item {
+			width: 48%;
+			margin: 0 0 15px;
+		}
+		&__link {
+			padding: 15px 0;
+			color: $gray2;
+			background: $base_color;
+			width: 100%;
+			display: block;
+			text-align: center;
+			font-family: $font_en;
+			text-transform: uppercase;
+			transition: all .8s ease;
+			box-shadow: rgb(50 50 93 / 10%) 0px 13px 27px -5px, rgb(0 0 0 / 10%) 0px 8px 16px -8px;
+			&:hover {
+				box-shadow: none;
+			}
+		}
+	}
+	&__tag-list {
+		display: flex;
+		flex-wrap: wrap;
+		margin-bottom: 40px;
+		&__item {
+			margin: 0 15px 15px 0;
+		}
+		&__link {
+			padding: 15px 20px;
+			color: $gray2;
+			background: $base_color;
+			display: block;
+			text-align: center;
+			transition: all .8s ease;
+			border-radius: 25px;
+			font-family: $font_en;
+			text-transform: uppercase;
+			box-shadow: rgb(50 50 93 / 10%) 0px 13px 27px -5px, rgb(0 0 0 / 10%) 0px 8px 16px -8px;
+			&:hover {
+				box-shadow: none;
+			}
+		}
+	}
+}

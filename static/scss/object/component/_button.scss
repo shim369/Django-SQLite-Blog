@@ -1,0 +1,41 @@
+.c-button {
+	background-color: $square_light;
+	border: solid thin $square_light;
+	color: #bdbaba;
+	display: inline-block;
+	line-height: 1;
+	width: 100%;
+	padding: 15px 25px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+	transition: all .8s ease;
+	margin-top: 15px;
+	cursor: pointer;
+	i {
+		margin-left: 5px;
+	}
+	&:hover {
+		background-color: transparent;
+		border: solid thin $square_dark;
+		color: $square_dark;
+	}
+	&__submit {
+		width: 100%;
+		background: $square_light;
+		border: 0;
+		cursor: pointer;
+		color: $gray2;
+		font-size: 1.3rem;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		transition: all .8s ease;
+		font-weight: 700;
+		margin: 30px auto;
+		&:hover {
+			opacity: .8;
+		}
+	}
+}

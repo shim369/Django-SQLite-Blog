@@ -1,0 +1,50 @@
+.c-breadcrumbs {
+	max-width: 1400px;
+	list-style: none;
+	overflow: hidden;
+	margin-bottom: 30px;
+	@media screen and (max-width: 800px) {
+		margin-bottom: 0;
+	}
+	&__item {
+		display: inline;
+		list-style: none;
+		font-family: $font_normal;
+		font-weight: bold;
+		text-transform: uppercase;
+		@media screen and (max-width: 800px) {
+			margin-bottom: 15px;
+		}
+		&::after {
+			content: '>';
+			padding: 0 0.2em;
+			color: $base_color;
+			font-weight: bold;
+		}
+		&:first-child {
+			i {
+				margin-right: 3px;
+			}
+		}
+		&:last-child:after {
+			content: '';
+		}
+		a {
+			font-family: $font_normal;
+			text-transform: uppercase;
+			text-decoration: none;
+			color: $base_color;
+			word-break: break-all;
+			font-size: 1rem;
+			font-weight: bold;
+			@media screen and (max-width: 800px) {
+				padding: 10px 0;
+				display: inline-block;
+				border-radius: 5px;
+			}
+			&:hover {
+				opacity: .8;
+			}
+		}
+	}
+}

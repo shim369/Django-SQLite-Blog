@@ -1,0 +1,41 @@
+.l-contents {
+	&__container {
+		max-width: $base_width;
+		padding-top: 80px;
+		padding-bottom: 80px;
+		@media screen and (max-width: 800px) {
+			padding-top: 8vh;
+			padding-bottom: 8vh;
+		}
+	}
+	&__title {
+		font-size: 5rem;
+		display: flex;
+		align-items: center;
+		margin-bottom: 80px;
+		font-weight: bold;
+		color: $base_color;
+		font-family: $font_en;
+		@media screen and (max-width: 800px) {
+			font-size: 2.8rem;
+			margin-bottom: 40px;
+		}
+		&::after {
+			margin-left: .4em;
+			content: "";
+			flex-grow: 1;
+			height: 3px;
+			background: $base_color;
+			display: block;
+			@media screen and (max-width: 800px) {
+				height: 1.7px;
+			}
+		}
+	}
+	&__container-inner {
+		display: flex;
+		@media screen and (max-width: 950px) {
+			flex-direction: column;
+		}
+	}
+}

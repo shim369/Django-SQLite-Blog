@@ -1,0 +1,10 @@
+*.log
+*.pyc
+__pycache__/
+db-volumes/
+db.sqlite3
+.djangoenv
+.env
+.DS_Store
+static/json/sage-philosophy-372308-7341bc430ed0.json
+myenv/

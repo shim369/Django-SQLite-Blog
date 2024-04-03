@@ -1,0 +1,71 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, minimum-scale=1">
+<title>Send completely | TECH BLOG</title>
+<meta name="description" content="Send completely.Thanks for your message. Depending on the content, I may not be able to reply. Also, replies may be delayed. I apologize in advance. I am sorry.">
+<link rel="stylesheet" href="/static/css/contact.css?{% now 'U' %}">
+<link rel="preconnect" href="https://ajax.googleapis.com">
+<link rel="dns-prefetch" href="https://ajax.googleapis.com">
+<link rel="canonical" href="https://sohtani.pythonanywhere.com/contact/complete/">
+<link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+<link rel="manifest" href="/static/json/manifest.json">
+<script>
+if ('serviceWorker' in navigator) {
+	window.addEventListener('load', function() {
+		navigator.serviceWorker.register('../../sw.js').then(function() { console.log('Service Worker Registered');
+		},function(err) {
+		console.log('ServiceWorker registration failed: ', err);
+		});
+	});
+}
+</script>
+</head>
+<body id="top">
+<div class="f-wrapper">
+{% include './include/l_header.html' %}
+<main class="l-main">
+	<div class="l-contents">
+		<div class="l-container">
+		  <p class="l-contents__title">CONTACT</p>
+		  <div class="l-container__inner">
+			<article class="l-article__contact">
+					<div class="p-complete">
+						<h1 class="p-complete__h1 en">Send completely</h1>
+						<h2 class="p-complete__h2">Thanks for your message.<br>Depending on the content, I may not be able to reply.<br>Also, replies may be delayed.<br>I apologize in advance. I'm sorry.</h2>
+					</div>
+			</article>
+			{% include './include/l_aside.html' %}
+		  </div>
+			<ol class="c-breadcrumbs">
+				<li class="c-breadcrumbs__item">
+					<a href="{% url 'bbs:index' %}" title="home">
+						<i class="icon-home3"></i>
+					</a>
+				</li>
+				<li class="c-breadcrumbs__item">
+					<a href="{% url 'bbs:contact_form' %}">
+						CONTACT
+					</a>
+				</li>
+				<li class="c-breadcrumbs__item">Send completely</li>
+			</ol>
+		</div>
+	</div>
+	{% include './include/l_author.html' %}
+</main>
+{% include './include/l_footer.html' %}
+</div>
+<script defer src="/static/js/main.js?{% now 'U' %}"></script>
+<script type="application/ld+json">[{"@context": "https://schema.org","@type": "SiteNavigationElement","hasPart": [{"@type": "WebPage","name": "HOME","url": "https://sohtani.pythonanywhere.com/"},{"@type": "CollectionPage","name": "PYTHON","url": "https://sohtani.pythonanywhere.com/category/python/"},{"@type": "CollectionPage","name": "TOOL","url": "https://sohtani.pythonanywhere.com/category/tool/"},{"@type": "WebPage","name": "FITNESS","url": "https://sohtani.pythonanywhere.com/fitness/"},{"@type": "ContactPage","name": "CONTACT","url": "https://sohtani.pythonanywhere.com/contact/"},{"@type": "WebPage","name": "GitHub","url": "https://github.com/shim369"}]}]</script>
+<!-- Google tag (gtag.js) -->
+<script defer src="https://www.googletagmanager.com/gtag/js?id=G-C4QW4L4G4R"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-C4QW4L4G4R');
+</script>
+</body>
+</html>

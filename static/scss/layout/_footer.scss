@@ -1,0 +1,38 @@
+.l-footer {
+	position: relative;
+	z-index: 1;
+	&__copyright {
+		padding: 15px 0;
+		text-align: center;
+		color: $gray2;
+		background: $base_color;
+		font-family: $font_en;
+		text-transform: uppercase;
+	}
+	// &__page-top {
+	// 	position: absolute;
+	// 	bottom: 10px;
+	// 	right: 10px;
+	// 	z-index: 99;
+	// 	a {
+	// 		display: flex;
+	// 		background: $base_color;
+	// 		box-shadow: rgb(47 42 37 / 20%) 2px 2px 2px;
+	// 		color: #fff;
+	// 		width: 56px;
+	// 		height: 56px;
+	// 		line-height: 1;
+	// 		font-size: 1.2rem;
+	// 		text-align: center;
+	// 		flex-direction: column;
+	// 		padding: 16px 10px;
+	// 		transition: all .8s ease;
+	// 		&:hover {
+	// 			background: rgba(38,39,43,.6);
+	// 		}
+	// 		i {
+	// 			color: #fff;
+	// 		}
+	// 	}
+	// }
+}

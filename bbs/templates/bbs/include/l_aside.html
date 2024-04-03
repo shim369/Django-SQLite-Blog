@@ -1,0 +1,21 @@
+<aside class="l-aside">{% if article %}
+	<h3 class="l-aside__title">WHAT'S NEW</h3>
+	<ul class="l-aside__wn-list">{% for article in entries %}
+	<li class="l-aside__wn-list__item">
+		<a class="l-aside__wn-list__link" href="{% url 'bbs:detail' article.slug %}">
+			<picture class="l-aside__wn-list__thumbnail">
+				<source srcset="/media/{{ article.thumbnail_image_name }}.webp" type="image/webp" width="123" height="82">
+				<img src="/media/{{ article.thumbnail_image_name }}.jpg" width="123" height="82" alt="">
+			</picture>
+			<div class="l-aside__wn-list__text">
+				<h4 class="l-aside__wn-list__h4">{{ article.title }}</h4>
+				<time class="l-aside__wn-list__time" datetime="{{ article.created_at|date:'Y-m-d' }}"><i class="icon-clock2"></i>{{ article.created_at|date:"Y/m/d" }}</time>
+			</div>
+		</a>
+	</li>{% endfor %}
+	</ul>{% endif %}
+	{% if articles or article %}<h3 class="l-aside__title">CATEGORY</h3>
+	<ul class="l-aside__category-list">{% for category in category_list %}<li class="l-aside__category-list__item"><a class="l-aside__category-list__link" href="{% url 'bbs:category' category %}">{{ category.name }}</a></li>{% endfor %}</ul>{% endif %}
+	{% if articles or article %}<h3 class="l-aside__title">TAG</h3>
+	<ul class="l-aside__tag-list">{% for tag in tag_list %}<li class="l-aside__tag-list__item"><a class="l-aside__tag-list__link" href="{% url 'bbs:tag' tag %}">{{ tag.name }}</a></li>{% endfor %}</ul>{% endif %}
+</aside>
