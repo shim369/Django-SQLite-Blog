@@ -1,105 +1,62 @@
-document.addEventListener('DOMContentLoaded', (event) => {
-    let weightInput = document.getElementById('weight');
-    let heightInput = document.getElementById('height');
 
-    let bmiResult = document.getElementById('bmi-result');
-    
-    let bmiTable = document.getElementById('bmi-table');
+let weightInput = document.getElementById('weight');
+let heightInput = document.getElementById('height');
 
-    function calculateBMI(weight, height) {
-        return weight / (height * height);
+let bmiResult = document.getElementById('bmi-result');
+
+let bmiTable = document.getElementById('bmi-table');
+
+calculateBMI = (weight, height) => {
+    return weight / (height * height);
+};
+
+
+updateBMITableView = (bmi) => {
+    let st1 = document.getElementById('st1');
+    let st2 = document.getElementById('st2');
+    let st3 = document.getElementById('st3');
+    let st4 = document.getElementById('st4');
+    let st5 = document.getElementById('st5');
+    let st6 = document.getElementById('st6');
+    let st7 = document.getElementById('st7');
+    let st8 = document.getElementById('st8');
+    switch (true) {
+        case bmi <= 15.99:
+            st1.classList.add("p-article__bg-color");
+            break;
+        case bmi <= 16.99:
+            st2.classList.add("p-article__bg-color");
+            break;
+        case bmi <= 18.49:
+            st3.classList.add("p-article__bg-color");
+            break;
+        case bmi <= 24.99:
+            st4.classList.add("p-article__bg-color");
+            break;
+        case bmi <= 29.99:
+            st5.classList.add("p-article__bg-color");
+            break;
+        case bmi <= 34.99:
+            st6.classList.add("p-article__bg-color");
+            break;
+        case bmi <= 39.99:
+            st7.classList.add("p-article__bg-color");
+            break;
+        case bmi >= 40:
+            st8.classList.add("p-article__bg-color");
+            break;
     }
 
-    function createBMITableView() {
-        let table = document.createElement('table');
-        table.classList.add('p-article__table__bmi2');
+};
 
-        let bmiRanges = [
-            { min: -Infinity, max: 15.99, description: 'Severe thinness' },
-            { min: 16.00, max: 16.99, description: 'Moderate thinness' },
-            { min: 17.00, max: 18.49, description: 'Mild thinness' },
-            { min: 18.50, max: 24.99, description: 'Normal range' },
-            { min: 25.00, max: 29.99, description: 'Pre-obese' },
-            { min: 30.00, max: 34.99, description: 'Obese class1' },
-            { min: 35.00, max: 39.99, description: 'Obese class2' },
-            { min: 40.00, max: Infinity, description: 'Obese class3' }
-        ];
+document.getElementById('calculate-bmi').addEventListener('click', () => {
 
-        let thead = document.createElement('thead');
-        let trHead = document.createElement('tr');
-        let th1 = document.createElement('th');
-        th1.innerHTML = '<strong>Classification</strong>';
-        let th2 = document.createElement('th');
-        th2.innerHTML = '<strong>BMI（kg/m<sup>2</sup>）</strong>';
-        trHead.appendChild(th1);
-        trHead.appendChild(th2);
-        thead.appendChild(trHead);
-        table.appendChild(thead);
+    let weight = weightInput.value;
+    let height = heightInput.value / 100;
 
-        let tbody = document.createElement('tbody');
-        for (let i = 0; i < bmiRanges.length; i++) {
-            let tr = document.createElement('tr');
-            let td1 = document.createElement('td');
-            td1.innerHTML = `<span>${bmiRanges[i].description}</span>`;
-            tr.appendChild(td1);
-            let td2 = document.createElement('td');
-            if (bmiRanges[i].min === -Infinity) {
-                td2.innerHTML = `<span>- ${bmiRanges[i].max}</span>`;
-            } else if (bmiRanges[i].max === Infinity) {
-                td2.innerHTML = `<span>${bmiRanges[i].min} -</span>`;
-            } else {
-                td2.innerHTML = `<span>${bmiRanges[i].min} - ${bmiRanges[i].max}</span>`;
-            }
-            tr.appendChild(td2);
-            tbody.appendChild(tr);
-        }
-        table.appendChild(tbody);
+    let bmi = calculateBMI(weight, height);
 
-        bmiTable.appendChild(table);
-    }
+    bmiResult.innerHTML = bmi.toFixed(2);
 
-    function updateBMITableView(bmi) {
-        let rows = bmiTable.getElementsByTagName('table')[0].getElementsByTagName('tbody')[0].rows;
-
-        for (let i = 0; i < rows.length; i++) {
-            let range = rows[i].cells[1].innerText.split(' - ');
-            let min, max;
-            if (range[0] === '-') {
-                min = -Infinity;
-                max = parseFloat(range[1]);
-            } else if (range[1] === '') {
-                min = parseFloat(range[0]);
-                max = Infinity;
-            } else {
-                min = parseFloat(range[0]);
-                max = parseFloat(range[1]);
-            }
-
-            if (bmi >= min && bmi < max) {
-                rows[i].style.backgroundColor = '#fcf7e7';
-            } else if (bmi >= 40 && rows[i].cells[0].innerText.includes('Obese class3')) {
-                rows[i].style.backgroundColor = '#fcf7e7';
-            } else if (bmi <= 15.99 && rows[i].cells[0].innerText.includes('Severe thinness')) {
-                rows[i].style.backgroundColor = '#fcf7e7';
-            } else {
-                rows[i].style.backgroundColor = '';
-            }
-            
-        }
-    }
-
-    createBMITableView();
-
-    document.getElementById('calculate-bmi').addEventListener('click', () => {
-
-        let weight = weightInput.value;
-        let height = heightInput.value / 100;
-
-        let bmi = calculateBMI(weight, height);
-
-        bmiResult.innerHTML = bmi.toFixed(2);
-
-        updateBMITableView(bmi);
-    });
-
+    updateBMITableView(bmi);
 });
