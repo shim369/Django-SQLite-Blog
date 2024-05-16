@@ -1,197 +1,374 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
-<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
-  <link rel="stylesheet" href="/static/css/detail.css?{% now 'U' %}">
-  <title>{{ article.title }}</title>
-  <meta property="og:title" content="{{ article.title }}">
-  <meta property="og:type" content="article">
-  <meta property="og:description" content="{{ article.description }}">
-  <meta property="og:image" content="https://sohtani.pythonanywhere.com/media/{{ article.thumbnail_image_name }}.jpg">
-  <meta property="og:url" content="https://sohtani.pythonanywhere.com{% url 'bbs:detail' article.slug %}">
-  <meta property="og:site_name" content="TECH BLOG">
-  <meta property="og:locale" content="en">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="TECH BLOG">
-  <meta name="twitter:title" content="{{ article.title }}">
-  <meta name="twitter:description" content="{{ article.description }}">
-  <meta name="twitter:image" content="https://sohtani.pythonanywhere.com/media/{{ article.thumbnail_image_name }}.jpg">
-  <meta name="twitter:url" content="https://sohtani.pythonanywhere.com{% url 'bbs:detail' article.slug %}">
-  <meta name="description" content="{{ article.description }}">
-  <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-  <meta name="theme-color" content="#161719">
-  <link rel="preconnect" href="https://www.googletagmanager.com">
-  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-  <link rel="canonical" href="https://sohtani.pythonanywhere.com{% url 'bbs:detail' article.slug %}">
-  <link rel="apple-touch-icon" href="/media/icon-s.png">
-  <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
-  <link rel="manifest" href="/static/json/manifest.json">
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function () {
-        navigator.serviceWorker.register('../sw.js').then(function () {
-          console.log('Service Worker Registered');
-        }, function (err) {
-          console.log('ServiceWorker registration failed: ', err);
+  <head
+    prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#"
+  >
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,minimum-scale=1"
+    />
+    <link rel="stylesheet" href="/static/css/detail.css?{% now 'U' %}" />
+    <title>{{ article.title }}</title>
+    <meta property="og:title" content="{{ article.title }}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:description" content="{{ article.description }}" />
+    <meta
+      property="og:image"
+      content="https://sohtani.pythonanywhere.com/media/{{ article.thumbnail_image_name }}.jpg"
+    />
+    <meta
+      property="og:url"
+      content="https://sohtani.pythonanywhere.com{% url 'bbs:detail' article.slug %}"
+    />
+    <meta property="og:site_name" content="TECH BLOG" />
+    <meta property="og:locale" content="en" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="TECH BLOG" />
+    <meta name="twitter:title" content="{{ article.title }}" />
+    <meta name="twitter:description" content="{{ article.description }}" />
+    <meta
+      name="twitter:image"
+      content="https://sohtani.pythonanywhere.com/media/{{ article.thumbnail_image_name }}.jpg"
+    />
+    <meta
+      name="twitter:url"
+      content="https://sohtani.pythonanywhere.com{% url 'bbs:detail' article.slug %}"
+    />
+    <meta name="description" content="{{ article.description }}" />
+    <meta
+      name="robots"
+      content="max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+    />
+    <meta name="theme-color" content="#161719" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    <link
+      rel="canonical"
+      href="https://sohtani.pythonanywhere.com{% url 'bbs:detail' article.slug %}"
+    />
+    <link rel="apple-touch-icon" href="/media/icon-s.png" />
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" />
+    <link rel="manifest" href="/static/json/manifest.json" />
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function () {
+          navigator.serviceWorker.register("../sw.js").then(
+            function () {
+              console.log("Service Worker Registered");
+            },
+            function (err) {
+              console.log("ServiceWorker registration failed: ", err);
+            }
+          );
         });
-      });
-    }
-  </script>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-C4QW4L4G4R"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-C4QW4L4G4R');
-  </script>
-</head>
+      }
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-C4QW4L4G4R"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-C4QW4L4G4R");
+    </script>
+  </head>
 
-<body id="top">
-  <div class="l-wrapper">
-    {% include './include/l_header.html' %}
-    <main class="l-main">
-      <div class="l-contents">
-        <div class="l-container">
-          <p class="l-contents__title">BLOG</p>
-          <div class="l-container__inner">
-            <article class="l-article blog-page">
-              <div class="p-article">
-                <div class="p-article__head">
-                  <p class="p-article__category"><a href="{% url 'bbs:category' article.category %}">{{ article.category
-                      }}</a></p>
-                  <h1 class="p-article__title">{{ article.title }}</h1>
-                  <p class="p-article__date">
-                    <time class="p-article__time" datetime="{{ article.created_at|date:'Y-m-d' }}"><i
-                        class="icon-clock2"></i>{{ article.created_at|date:"Y/m/d" }}</time>
-                    <!-- <time class="p-article__time" datetime="{{ article.updated_at|date:'Y-m-d' }}"><i class="icon-spinner11"></i>{{ article.updated_at|date:'Y/m/d' }}</time> -->
-                    <time class="p-article__time" datetime="{{ latest_date|date:'Y-m-d' }}"><i
-                        class="icon-spinner11"></i>{{ latest_date|date:'Y/m/d' }}</time>
-                  </p>
-                </div>
-                <figure class="p-article__thumbnail">
-                  <picture>
-                    <source srcset="/media/{{ article.thumbnail_image_name }}.webp" type="image/webp" width="868"
-                      height="400">
-                    <img src="/media/{{ article.thumbnail_image_name }}.jpg" width="868" height="400"
-                      alt="{{ article.category.name }}">
-                  </picture>
-                </figure>
-                <div class="p-article__body">
-                  {% if article.slug == "fitness" %}
-                  <h2>BMI（Body Mass Index） by WHO</h2>
-                  <p>Compare BMI results with the BMI table for adults published by WHO.</p>
-                  <p>It is used for both men and women, age 20 or older.</p>
-                  <p>As you measure with BMI Calculator, the table will be colored according to your BMI result.</p>
-                  <p>Enter your height and weight and press the SEND BUTTON to measure your BMI.</p>
-                  <table class="p-article__table__bmi1">
-                    <tbody>
-                      <tr>
-                        <th colspan="2">BMI Calculator</th>
-                      </tr>
-                      <tr>
-                        <td><label>Height(cm)<br><input id="height" type="number" class="p-article__table__bmi1__input"
-                              step="1"></label></td>
-                        <td><label>Weight(kg)<br><input id="weight" type="number" class="p-article__table__bmi1__input"
-                              step="0.1"></label></td>
-                      </tr>
-                      <tr>
-                        <td colspan="2"><button id="calculate-bmi" type="submit"
-                            class="c-button__submit">Calculate</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td colspan="2">
-                          <div class="bmi-result">BMI = <span id="bmi-result"></span></div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <div id="bmi-table">
-                    <table class="p-article__table__bmi2">
-                      <thead>
-                        <tr>
-                          <th><strong>Classification</strong></th>
-                          <th><strong>BMI（kg/m<sup>2</sup>）</strong></th>
-                        </tr>
-                      </thead>
+  <body id="top">
+    <div class="l-wrapper">
+      {% include './include/l_header.html' %}
+      <main class="l-main">
+        <div class="l-contents">
+          <div class="l-container">
+            <p class="l-contents__title">BLOG</p>
+            <div class="l-container__inner">
+              <article class="l-article blog-page">
+                <div class="p-article">
+                  <div class="p-article__head">
+                    <p class="p-article__category">
+                      <a href="{% url 'bbs:category' article.category %}"
+                        >{{ article.category }}</a
+                      >
+                    </p>
+                    <h1 class="p-article__title">{{ article.title }}</h1>
+                    <p class="p-article__date">
+                      <time class="p-article__time" datetime="{{ article.created_at|date:"Y-m-d" }}">
+                          <i class="icon-clock2"></i>{{ article.created_at|date:"Y/m/d" }}
+                      </time>
+                      <time class="p-article__time" datetime="{{ latest_date|date:"Y-m-d" }}">
+                          <i class="icon-spinner11"></i>{{ latest_date|date:"Y/m/d" }}
+                      </time>
+                    </p>
+                  </div>
+                  <figure class="p-article__thumbnail">
+                    <picture>
+                      <source
+                        srcset="/media/{{ article.thumbnail_image_name }}.webp"
+                        type="image/webp"
+                        width="868"
+                        height="400"
+                      />
+                      <img
+                        src="/media/{{ article.thumbnail_image_name }}.jpg"
+                        width="868"
+                        height="400"
+                        alt="{{ article.category.name }}"
+                      />
+                    </picture>
+                  </figure>
+                  <div class="p-article__body">
+                    {% if article.slug == "fitness" %}
+                    <h2>BMI（Body Mass Index） by WHO</h2>
+                    <p>
+                      Compare BMI results with the BMI table for adults
+                      published by WHO.
+                    </p>
+                    <p>It is used for both men and women, age 20 or older.</p>
+                    <p>
+                      As you measure with BMI Calculator, the table will be
+                      colored according to your BMI result.
+                    </p>
+                    <p>
+                      Enter your height and weight and press the SEND BUTTON to
+                      measure your BMI.
+                    </p>
+                    <table class="p-article__table__bmi1">
                       <tbody>
-                        <tr id="st1">
-                          <td><span>Severe thinness</span></td>
-                          <td><span>- 15.99</span></td>
+                        <tr>
+                          <th colspan="2">BMI Calculator</th>
                         </tr>
-                        <tr id="st2">
-                          <td><span>Moderate thinness</span></td>
-                          <td><span>16 - 16.99</span></td>
+                        <tr>
+                          <td>
+                            <label
+                              >Height(cm)<br /><input
+                                id="height"
+                                type="number"
+                                class="p-article__table__bmi1__input"
+                                step="1"
+                            /></label>
+                          </td>
+                          <td>
+                            <label
+                              >Weight(kg)<br /><input
+                                id="weight"
+                                type="number"
+                                class="p-article__table__bmi1__input"
+                                step="0.1"
+                            /></label>
+                          </td>
                         </tr>
-                        <tr id="st3">
-                          <td><span>Mild thinness</span></td>
-                          <td><span>17 - 18.49</span></td>
+                        <tr>
+                          <td colspan="2">
+                            <button
+                              id="calculate-bmi"
+                              type="submit"
+                              class="c-button__submit"
+                            >
+                              Calculate
+                            </button>
+                          </td>
                         </tr>
-                        <tr id="st4">
-                          <td><span>Normal range</span></td>
-                          <td><span>18.5 - 24.99</span></td>
-                        </tr>
-                        <tr id="st5">
-                          <td><span>Pre-obese</span></td>
-                          <td><span>25 - 29.99</span></td>
-                        </tr>
-                        <tr id="st6">
-                          <td><span>Obese class1</span></td>
-                          <td><span>30 - 34.99</span></td>
-                        </tr>
-                        <tr id="st7">
-                          <td><span>Obese class2</span></td>
-                          <td><span>35 - 39.99</span></td>
-                        </tr>
-                        <tr id="st8">
-                          <td><span>Obese class3</span></td>
-                          <td><span>40 -</span></td>
+                        <tr>
+                          <td colspan="2">
+                            <div class="bmi-result">
+                              BMI = <span id="bmi-result"></span>
+                            </div>
+                          </td>
                         </tr>
                       </tbody>
                     </table>
+                    <div id="bmi-table">
+                      <table class="p-article__table__bmi2">
+                        <thead>
+                          <tr>
+                            <th><strong>Classification</strong></th>
+                            <th><strong>BMI（kg/m<sup>2</sup>）</strong></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr id="st1">
+                            <td><span>Severe thinness</span></td>
+                            <td><span>- 15.99</span></td>
+                          </tr>
+                          <tr id="st2">
+                            <td><span>Moderate thinness</span></td>
+                            <td><span>16 - 16.99</span></td>
+                          </tr>
+                          <tr id="st3">
+                            <td><span>Mild thinness</span></td>
+                            <td><span>17 - 18.49</span></td>
+                          </tr>
+                          <tr id="st4">
+                            <td><span>Normal range</span></td>
+                            <td><span>18.5 - 24.99</span></td>
+                          </tr>
+                          <tr id="st5">
+                            <td><span>Pre-obese</span></td>
+                            <td><span>25 - 29.99</span></td>
+                          </tr>
+                          <tr id="st6">
+                            <td><span>Obese class1</span></td>
+                            <td><span>30 - 34.99</span></td>
+                          </tr>
+                          <tr id="st7">
+                            <td><span>Obese class2</span></td>
+                            <td><span>35 - 39.99</span></td>
+                          </tr>
+                          <tr id="st8">
+                            <td><span>Obese class3</span></td>
+                            <td><span>40 -</span></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    {% endif %} {% autoescape off %}
+                    <div>{{ article.content | safe }}</div>
+                    {% endautoescape %}
                   </div>
-                  {% endif %}
-                  {% autoescape off %}
-                  <div>{{ article.content | safe }}</div>
-                  {% endautoescape %}
                 </div>
-              </div>
-            </article>
-            {% include './include/l_aside.html' %}
+              </article>
+              {% include './include/l_aside.html' %}
+            </div>
+            <ol class="c-breadcrumbs">
+              <li class="c-breadcrumbs__item">
+                <a href="{% url 'bbs:index' %}" title="home">
+                  <i class="icon-home3"></i>
+                </a>
+              </li>
+              <li class="c-breadcrumbs__item">
+                <a href="{% url 'bbs:category' article.category %}">
+                  {{ article.category.name }}
+                </a>
+              </li>
+              <li class="c-breadcrumbs__item">{{ article.title }}</li>
+            </ol>
           </div>
-          <ol class="c-breadcrumbs">
-            <li class="c-breadcrumbs__item">
-              <a href="{% url 'bbs:index' %}" title="home">
-                <i class="icon-home3"></i>
-              </a>
-            </li>
-            <li class="c-breadcrumbs__item">
-              <a href="{% url 'bbs:category' article.category %}">
-                {{ article.category.name }}
-              </a>
-            </li>
-            <li class="c-breadcrumbs__item">
-              {{ article.title }}
-            </li>
-          </ol>
         </div>
-      </div>
-      {% include './include/l_author.html' %}
-    </main>
-    {% include './include/l_footer.html' %}
-  </div>
-  <script defer src="/static/js/main.js?{% now 'U' %}"></script>
-  <script defer src="/static/js/bmi.js?{% now 'U' %}"></script>
-  <script
-    type="application/ld+json">[{"@context": "https://schema.org","@type": "SiteNavigationElement","hasPart": [{"@type": "WebPage","name": "HOME","url": "https://sohtani.pythonanywhere.com/"},{"@type": "CollectionPage","name": "PYTHON","url": "https://sohtani.pythonanywhere.com/category/python/"},{"@type": "CollectionPage","name": "TOOL","url": "https://sohtani.pythonanywhere.com/category/tool/"},{"@type": "WebPage","name": "FITNESS","url": "https://sohtani.pythonanywhere.com/fitness/"},{"@type": "ContactPage","name": "CONTACT","url": "https://sohtani.pythonanywhere.com/contact/"},{"@type": "WebPage","name": "GitHub","url": "https://github.com/shim369"}]}]</script>
-  <script
-    type="application/ld+json">{"@context": "https://schema.org","@type": "Blog","blogPost": [{"@type": "BlogPosting","headline": "{{ article.title }}","description": "{{ article.description }}","url": "https://sohtani.pythonanywhere.com{% url 'bbs:detail' article.slug %}","mainEntityOfPage": {"@type":"WebPage","@id":"https://sohtani.pythonanywhere.com{% url 'bbs:detail' article.slug %}"},"datePublished": "{{ article.created_at|date:'Y-m-d' }}","dateModified": "{{ article.updated_at|date:'Y-m-d' }}","image": {"@type": "ImageObject","url": "https://sohtani.pythonanywhere.com/media/{{ article.thumbnail_image_name }}.jpg","width": "868","height": "400"},"author": {"@type": "Person","name": "S Ohtani","url": "https://github.com/shim369"},"publisher": {"@type": "Organization","name": "TECH BLOG","logo":{"@type": "ImageObject","url": "https://sohtani.pythonanywhere.com/media/logo.jpg","width": "254","height": "83"}},"articleBody": "{{ article.article_body }}"}]}</script>
-  <script
-    type="application/ld+json">{"@context": "https://schema.org","@type": "BreadcrumbList","itemListElement": [{"@type": "ListItem","position": 1,"item": {"@id": "https://sohtani.pythonanywhere.com/","name": "home"}},{"@type": "ListItem","position": 2,"item": {"@id": "https://sohtani.pythonanywhere.com/category/{{ article.category.name }}/","name": "{{ article.category.name }}"}},{"@type": "ListItem","position": 3,"item": {"@id": "https://sohtani.pythonanywhere.com{% url 'bbs:detail' article.slug %}","name": "{{ article.title }}"}}]}</script>
-</body>
-
+        {% include './include/l_author.html' %}
+      </main>
+      {% include './include/l_footer.html' %}
+    </div>
+    <script defer src="/static/js/main.js?{% now 'U' %}"></script>
+    <script defer src="/static/js/bmi.js?{% now 'U' %}"></script>
+    <script type="application/ld+json">
+      [
+        {
+          "@context": "https://schema.org",
+          "@type": "SiteNavigationElement",
+          "hasPart": [
+            {
+              "@type": "WebPage",
+              "name": "HOME",
+              "url": "https://sohtani.pythonanywhere.com/"
+            },
+            {
+              "@type": "CollectionPage",
+              "name": "PYTHON",
+              "url": "https://sohtani.pythonanywhere.com/category/python/"
+            },
+            {
+              "@type": "CollectionPage",
+              "name": "TOOL",
+              "url": "https://sohtani.pythonanywhere.com/category/tool/"
+            },
+            {
+              "@type": "WebPage",
+              "name": "FITNESS",
+              "url": "https://sohtani.pythonanywhere.com/fitness/"
+            },
+            {
+              "@type": "ContactPage",
+              "name": "CONTACT",
+              "url": "https://sohtani.pythonanywhere.com/contact/"
+            },
+            {
+              "@type": "WebPage",
+              "name": "GitHub",
+              "url": "https://github.com/shim369"
+            }
+          ]
+        }
+      ]
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "blogPost": [
+          {
+            "@type": "BlogPosting",
+            "headline": "{{ article.title }}",
+            "description": "{{ article.description }}",
+            "url": "https://sohtani.pythonanywhere.com{% url 'bbs:detail' article.slug %}",
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://sohtani.pythonanywhere.com{% url 'bbs:detail' article.slug %}"
+            },
+            "datePublished": "{{ article.created_at|date:'Y-m-d' }}",
+            "dateModified": "{{ article.updated_at|date:'Y-m-d' }}",
+            "image": {
+              "@type": "ImageObject",
+              "url": "https://sohtani.pythonanywhere.com/media/{{ article.thumbnail_image_name }}.jpg",
+              "width": "868",
+              "height": "400"
+            },
+            "author": {
+              "@type": "Person",
+              "name": "S Ohtani",
+              "url": "https://github.com/shim369"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "TECH BLOG",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://sohtani.pythonanywhere.com/media/logo.jpg",
+                "width": "254",
+                "height": "83"
+              }
+            },
+            "articleBody": "{{ article.article_body }}"
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@id": "https://sohtani.pythonanywhere.com/",
+              "name": "home"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@id": "https://sohtani.pythonanywhere.com/category/{{ article.category.name }}/",
+              "name": "{{ article.category.name }}"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+              "@id": "https://sohtani.pythonanywhere.com{% url 'bbs:detail' article.slug %}",
+              "name": "{{ article.title }}"
+            }
+          }
+        ]
+      }
+    </script>
+  </body>
 </html>
