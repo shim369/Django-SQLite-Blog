@@ -8,6 +8,7 @@ load_dotenv()
 GOOGLE_API_SSID = os.getenv("GOOGLE_API_SSID")
 GOOGLE_API_JSON = os.getenv("GOOGLE_API_JSON")
 IMG_PATH = os.getenv("IMG_PATH")
+EXCEL_PATH = os.getenv("EXCEL_PATH")
 
 from django.shortcuts import render, redirect
 from .forms import ContactForm
@@ -47,29 +48,43 @@ def tag(request, tag):
 	page_obj = paginate_queryset(request, articles, 6)
 	return render(request, 'bbs/list.html',{'tag': tag, 'articles': page_obj.object_list,'page_obj': page_obj })
 
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
 from datetime import datetime
 
 def detail(request, slug):
 	entries = Article.objects.order_by('-id')[:3]
 	article = get_object_or_404(Article, slug=slug)
 
-	scope = ['https://spreadsheets.google.com/feeds']
-	path = os.path.expanduser(GOOGLE_API_JSON)
+	excel_file_path = EXCEL_PATH + 'weight.xlsx'
+	workbook = pd.ExcelFile(excel_file_path)
+	worksheet = workbook.parse('weight')
 
-	credentials = ServiceAccountCredentials.from_json_keyfile_name(path, scope)
-	gc = gspread.authorize(credentials)
-	workbook   = gc.open_by_key(GOOGLE_API_SSID)
-	worksheet  = workbook.worksheet("weight")
-	data = pd.DataFrame(worksheet.get_all_values()[1:], columns=worksheet.get_all_values()[0])
-	pngDate = str(worksheet.col_values(1)[-1])
+	col_values = worksheet.iloc[:, 0].dropna().values
+
+	pngDate = str(col_values[-1])
+	weight_png_date = pd.to_datetime(pngDate).date()
 
 	article_updated_at = article.updated_at
 
+
 	current_year = datetime.now().year
-	formatted_date = f"{current_year}/{pngDate}"
+	formatted_date = f"{current_year}/{weight_png_date.month}/{weight_png_date.day}"
 	weight_png_date = datetime.strptime(formatted_date, '%Y/%m/%d').date()
+
+
+	with plt.style.context('Solarize_Light2'):
+		plt.rcParams["figure.figsize"] = (12, 6)
+		plt.ylim(66, 84)
+
+		plt.plot(worksheet['date'], worksheet['weight'], marker='o', color='#4e3b2f')
+		plt.title('Weight Graph')
+		plt.xlabel('Date')
+		plt.ylabel('Weight')
+
+		plt.xticks(worksheet['date'], rotation=45, ha='right')
+
+		plt.grid(True)
+		plt.tight_layout()
+		plt.savefig(IMG_PATH + 'weight.png')
 
 	if article.slug == "fitness":
 		if article_updated_at > weight_png_date:
@@ -78,16 +93,6 @@ def detail(request, slug):
 			latest_date = weight_png_date
 	else:
 		latest_date = article_updated_at
-
-	with plt.style.context('Solarize_Light2'):
-		plt.rcParams["figure.figsize"] = (10,5)
-		plt.ylim(66, 84)
-		plt.xticks(size='small')
-		plt.plot(data['date'],data['weight'].astype('float'),marker = "o", color = "#4e3b2f")
-		plt.title('Weight Graph')
-		plt.xlabel('Date')
-		plt.ylabel('Weight')
-		plt.savefig(IMG_PATH + 'weight.png')
 
 	params = {
 		'article': article,
@@ -125,5 +130,3 @@ def contact_form(request):
 	else:
 		form = ContactForm()
 	return render(request, 'bbs/contact.html', {'form': form,'article':article,'entries': entries})
-
-
